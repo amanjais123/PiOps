@@ -1,12 +1,13 @@
 # 🚀 PiOps - Self-Hosted CI/CD Deployment Platform using Raspberry Pi
 
-PiOps is a lightweight self-hosted deployment platform built on a Raspberry Pi that automates the deployment of Node.js applications using a complete CI/CD pipeline. The project demonstrates how low-cost ARM-based hardware can be leveraged to host and manage modern web applications with industry-standard DevOps practices.
+PiOps is a lightweight self-hosted deployment platform built on a Raspberry Pi that automates the deployment of Node.js applications using a complete CI/CD pipeline. The project demonstrates how low-cost ARM-based hardware can be leveraged to host a full-stack application stack, including the application server, MongoDB database, and deployment infrastructure, using industry-standard DevOps practices.
 
 ## ✨ Features
 
 * 🖥️ Self-hosted Linux server running on Raspberry Pi
 * ⚙️ Automated CI/CD pipeline using Jenkins
-* 🐳 Docker-based containerized application deployment
+* 🐳 Docker-based containerized deployment
+* 🗄️ Self-hosted MongoDB database running on Raspberry Pi
 * 🌐 Nginx reverse proxy for application routing
 * 🔒 Secure remote server management via SSH
 * 📦 Git-based automated build and deployment workflows
@@ -26,14 +27,14 @@ Developer
     │
     ├── Build Application
     ├── Run Tests
-    └── Build Docker Image
+    └── Build Docker Images
     │
     ▼
  Raspberry Pi Server
     │
-    ├── Docker Container
-    ├── Node.js Application
-    └── Nginx Reverse Proxy
+    ├── Nginx Reverse Proxy
+    ├── Node.js Application Container
+    └── MongoDB Container
     │
     ▼
  End Users
@@ -49,14 +50,19 @@ Developer
 ### DevOps
 
 * Docker
+* Docker Compose
 * Jenkins
 * Git
 * CI/CD Pipelines
 
-### Application
+### Backend
 
 * Node.js
 * Express.js
+
+### Database
+
+* MongoDB
 
 ### Networking & Security
 
@@ -65,38 +71,35 @@ Developer
 
 ## 🎯 Objectives
 
-* Build a cost-effective self-hosted deployment environment.
-* Learn real-world DevOps workflows and automation.
-* Implement continuous integration and deployment practices.
-* Explore containerization on ARM-based hardware.
-* Gain hands-on experience with Linux server administration.
+* Build a completely self-hosted application infrastructure.
+* Automate application deployment through CI/CD pipelines.
+* Host both application and database services on Raspberry Pi hardware.
+* Implement containerized deployments for portability and scalability.
+* Gain hands-on experience with Linux server administration and DevOps workflows.
 
 ## 🔄 CI/CD Workflow
 
 1. Developer pushes code to GitHub.
-2. Jenkins automatically detects repository changes.
-3. Application is built and tested.
-4. Docker image is created.
-5. Existing container is replaced with the latest version.
-6. Nginx routes traffic to the updated application.
-7. Users access the newly deployed version with zero manual deployment steps.
+2. Jenkins automatically triggers the pipeline.
+3. Application is built and validated.
+4. Docker images are created and updated.
+5. Node.js application and MongoDB services are deployed on Raspberry Pi.
+6. Nginx routes incoming requests to the application container.
+7. Users access the latest deployed version without manual intervention.
 
-## 🚀 Key Learnings
+## 🚀 Key Highlights
 
-* Linux server administration and process management
-* Docker containerization and image management
-* Jenkins pipeline creation and automation
-* Reverse proxy configuration with Nginx
-* SSH-based remote server management
-* Continuous Integration and Continuous Deployment practices
-* Resource optimization for ARM-based systems
+* Hosted both the Node.js application and MongoDB database locally on Raspberry Pi.
+* Automated end-to-end deployments using Jenkins and Docker.
+* Configured Nginx reverse proxy and SSH-based remote administration.
+* Achieved a low-cost, self-managed infrastructure without relying on cloud hosting services.
+* Demonstrated real-world DevOps concepts including CI/CD, containerization, service orchestration, and server management.
 
 ## 📈 Future Enhancements
 
-* HTTPS support with Let's Encrypt
-* Kubernetes deployment using K3s
+* HTTPS with Let's Encrypt
+* Kubernetes (K3s) deployment on Raspberry Pi
 * Monitoring with Prometheus and Grafana
-* Multi-application hosting support
-* Automated backup and recovery system
-* Blue-Green deployment strategy
-
+* Automated database backups and disaster recovery
+* Multi-service deployment support
+* Blue-Green and Canary deployment strategies
