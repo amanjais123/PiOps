@@ -1,72 +1,102 @@
-## demo app - developing with Docker
+# 🚀 PiOps - Self-Hosted CI/CD Deployment Platform using Raspberry Pi
 
-This demo app shows a simple user profile app set up using 
-- index.html with pure js and css styles
-- nodejs backend with express module
-- mongodb for data storage
+PiOps is a lightweight self-hosted deployment platform built on a Raspberry Pi that automates the deployment of Node.js applications using a complete CI/CD pipeline. The project demonstrates how low-cost ARM-based hardware can be leveraged to host and manage modern web applications with industry-standard DevOps practices.
 
-All components are docker-based
+## ✨ Features
 
-### With Docker
+* 🖥️ Self-hosted Linux server running on Raspberry Pi
+* ⚙️ Automated CI/CD pipeline using Jenkins
+* 🐳 Docker-based containerized application deployment
+* 🌐 Nginx reverse proxy for application routing
+* 🔒 Secure remote server management via SSH
+* 📦 Git-based automated build and deployment workflows
+* 📊 Resource-efficient deployment optimized for ARM architecture
+* 🔄 Continuous Integration and Continuous Delivery for Node.js applications
 
-#### To start the application
+## 🏗️ Architecture
 
-Step 1: Create docker network
+```text
+Developer
+    │
+    ▼
+ GitHub Repository
+    │
+    ▼
+ Jenkins Pipeline
+    │
+    ├── Build Application
+    ├── Run Tests
+    └── Build Docker Image
+    │
+    ▼
+ Raspberry Pi Server
+    │
+    ├── Docker Container
+    ├── Node.js Application
+    └── Nginx Reverse Proxy
+    │
+    ▼
+ End Users
+```
 
-    docker network create mongo-network 
+## 🛠️ Tech Stack
 
-Step 2: start mongodb 
+### Infrastructure
 
-    docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --net mongo-network mongo    
+* Raspberry Pi
+* Linux (Raspberry Pi OS)
 
-Step 3: start mongo-express
-    
-    docker run -d -p 8081:8081 -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=password --net mongo-network --name mongo-express -e ME_CONFIG_MONGODB_SERVER=mongodb -e ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017 mongo-express   
+### DevOps
 
-_NOTE: creating docker-network in optional. You can start both containers in a default network. In this case, just emit `--net` flag in `docker run` command_
+* Docker
+* Jenkins
+* Git
+* CI/CD Pipelines
 
-Step 4: open mongo-express from browser
+### Application
 
-    http://localhost:8081
+* Node.js
+* Express.js
 
-Step 5: create `user-account` _db_ and `users` _collection_ in mongo-express
+### Networking & Security
 
-Step 6: Start your nodejs application locally - go to `app` directory of project 
+* Nginx
+* SSH
 
-    cd app
-    npm install 
-    node server.js
-    
-Step 7: Access you nodejs application UI from browser
+## 🎯 Objectives
 
-    http://localhost:3000
+* Build a cost-effective self-hosted deployment environment.
+* Learn real-world DevOps workflows and automation.
+* Implement continuous integration and deployment practices.
+* Explore containerization on ARM-based hardware.
+* Gain hands-on experience with Linux server administration.
 
-### With Docker Compose
+## 🔄 CI/CD Workflow
 
-#### To start the application
+1. Developer pushes code to GitHub.
+2. Jenkins automatically detects repository changes.
+3. Application is built and tested.
+4. Docker image is created.
+5. Existing container is replaced with the latest version.
+6. Nginx routes traffic to the updated application.
+7. Users access the newly deployed version with zero manual deployment steps.
 
-Step 1: start mongodb and mongo-express
+## 🚀 Key Learnings
 
-    docker-compose -f docker-compose.yaml up
-    
-_You can access the mongo-express under localhost:8080 from your browser_
-    
-Step 2: in mongo-express UI - create a new database "user-account"
+* Linux server administration and process management
+* Docker containerization and image management
+* Jenkins pipeline creation and automation
+* Reverse proxy configuration with Nginx
+* SSH-based remote server management
+* Continuous Integration and Continuous Deployment practices
+* Resource optimization for ARM-based systems
 
-Step 3: in mongo-express UI - create a new collection "users" in the database "user-account"       
-    
-Step 4: start node server 
+## 📈 Future Enhancements
 
-    cd app
-    npm install
-    node server.js
-    
-Step 5: access the nodejs application from browser 
+* HTTPS support with Let's Encrypt
+* Kubernetes deployment using K3s
+* Monitoring with Prometheus and Grafana
+* Multi-application hosting support
+* Automated backup and recovery system
+* Blue-Green deployment strategy
 
-    http://localhost:3000
-
-#### To build a docker image from the application
-
-    docker build -t my-app:1.0 .       
-    
-The dot "." at the end of the command denotes location of the Dockerfile.
